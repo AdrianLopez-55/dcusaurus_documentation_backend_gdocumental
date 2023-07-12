@@ -1,0 +1,1325 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/": {
+            "get": {
+                "operationId": "AppController_getHello",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/personal/external-data-personal": {
+            "get": {
+                "operationId": "PersonalController_getExternalData",
+                "summary": "get all personal registered",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "External Data Personal"
+                ]
+            }
+        },
+        "/personal/external-data-personal/{id}": {
+            "get": {
+                "operationId": "PersonalController_getExternalDataById",
+                "summary": "get personal by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "External Data Personal"
+                ]
+            }
+        },
+        "/personal/{ci}": {
+            "get": {
+                "operationId": "PersonalController_getPersonalByCi",
+                "summary": "get personal by ci",
+                "parameters": [
+                    {
+                        "name": "ci",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "External Data Personal"
+                ]
+            }
+        },
+        "/api/login-central": {
+            "post": {
+                "operationId": "ApiController_loginCentral",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginCentralAuthDTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Validate Token"
+                ]
+            }
+        },
+        "/documents": {
+            "post": {
+                "operationId": "DocumentsController_create",
+                "summary": "registry new document",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateDocumentDTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "The document has been successfully created.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateDocumentDTO"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request response"
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            },
+            "get": {
+                "operationId": "DocumentsController_findAll",
+                "summary": "see all documents or search by filters",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "required": false,
+                        "in": "query",
+                        "example": "Gastos",
+                        "description": "search document by title",
+                        "schema": {}
+                    },
+                    {
+                        "name": "numberDocument",
+                        "required": false,
+                        "in": "query",
+                        "example": "DOC-001",
+                        "description": "search document by numer document",
+                        "schema": {}
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "documents finds",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateDocumentDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The documents cant find"
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/active": {
+            "get": {
+                "operationId": "DocumentsController_findDocumentActive",
+                "summary": "see only documents actives",
+                "parameters": [
+                    {
+                        "name": "numberDocument",
+                        "required": false,
+                        "in": "query",
+                        "example": "DOC-001",
+                        "description": "search document by numer document",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "required": false,
+                        "in": "query",
+                        "example": "Gastos",
+                        "description": "search document by title",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/inactive": {
+            "get": {
+                "operationId": "DocumentsController_findDocumentInactive",
+                "summary": "see only documents inactives",
+                "parameters": [
+                    {
+                        "name": "numberDocument",
+                        "required": false,
+                        "in": "query",
+                        "example": "DOC-001",
+                        "description": "search document by numer document",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "required": false,
+                        "in": "query",
+                        "example": "Gastos",
+                        "description": "search document by title",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/paginacion": {
+            "get": {
+                "operationId": "DocumentsController_findAllPaginate",
+                "summary": "get records by pagination",
+                "description": "Gets the records of documents by pagination",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "required": false,
+                        "in": "query",
+                        "example": 0,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "required": false,
+                        "in": "query",
+                        "example": 10,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/{id}": {
+            "get": {
+                "operationId": "DocumentsController_findOne",
+                "summary": "search document by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "document find"
+                    },
+                    "403": {
+                        "description": "document forbiden, document not use now"
+                    },
+                    "404": {
+                        "description": "document not found or not exist"
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            },
+            "put": {
+                "operationId": "DocumentsController_update",
+                "summary": "update document by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateDocumentDTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "document update correctly"
+                    },
+                    "403": {
+                        "description": "document not use now"
+                    },
+                    "404": {
+                        "description": "document not found"
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/{id}/documentDestination": {
+            "get": {
+                "operationId": "DocumentsController_obtaindDocumentDestination",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/{id}/versions/{version}": {
+            "get": {
+                "operationId": "DocumentsController_getDocumentVersion",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "version",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/{id}/inactive": {
+            "delete": {
+                "operationId": "DocumentsController_deleteDocument",
+                "summary": "assign a document record to inactive using id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "document converted to inactive successfully"
+                    },
+                    "404": {
+                        "description": "document not found or not exist"
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/{id}/active": {
+            "put": {
+                "operationId": "DocumentsController_reactiverDocument",
+                "summary": "reactivate a document record",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/{id}/comment": {
+            "post": {
+                "operationId": "DocumentsController_addComment",
+                "summary": "add dates from commnet document",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCommentDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "add comment into de document corectly"
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/{id}/signature-aproved": {
+            "post": {
+                "operationId": "DocumentsController_addSignatureAproved",
+                "summary": "add signatures aproved for document",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateSignatureAprovedDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "approved signatures affixed to the document correctly"
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/documents/{id}/milestone": {
+            "post": {
+                "operationId": "DocumentsController_addMIlestone",
+                "summary": "add milestone for documento",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateMilestoneDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "milestones add into de document correctly"
+                    }
+                },
+                "tags": [
+                    "Registry Documents"
+                ]
+            }
+        },
+        "/road-map": {
+            "post": {
+                "operationId": "RoadMapController_create",
+                "summary": "crear nueva localisacion fisica para documento",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateRoadMapDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Road-map"
+                ]
+            },
+            "get": {
+                "operationId": "RoadMapController_findAll",
+                "summary": "ver todas las hojas de rutas",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Road-map"
+                ]
+            }
+        },
+        "/road-map/{id}": {
+            "get": {
+                "operationId": "RoadMapController_findOne",
+                "summary": "buscar una hoja de ruta",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Road-map"
+                ]
+            },
+            "patch": {
+                "operationId": "RoadMapController_update",
+                "summary": "actualizar una hoja de ruta",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateRoadMapDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Road-map"
+                ]
+            },
+            "delete": {
+                "operationId": "RoadMapController_remove",
+                "summary": "eliminar una hoja de ruta",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Road-map"
+                ]
+            }
+        },
+        "/permissions": {
+            "post": {
+                "operationId": "PermissionsController_create",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePermissionDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Permissions"
+                ]
+            },
+            "get": {
+                "operationId": "PermissionsController_findAll",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Permissions"
+                ]
+            }
+        },
+        "/permissions/{id}": {
+            "get": {
+                "operationId": "PermissionsController_findOne",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Permissions"
+                ]
+            },
+            "put": {
+                "operationId": "PermissionsController_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePermissionDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Permissions"
+                ]
+            },
+            "delete": {
+                "operationId": "PermissionsController_remove",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "Permissions"
+                ]
+            }
+        },
+        "/organization-chart": {
+            "get": {
+                "operationId": "OrganizationChartController_findAll",
+                "summary": "obtain all organization chart",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "external-organization-chart-data"
+                ]
+            }
+        },
+        "/documentation-type": {
+            "post": {
+                "operationId": "DocumentationTypeController_create",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateDocumentationTypeDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "documentation-type"
+                ]
+            },
+            "get": {
+                "operationId": "DocumentationTypeController_findAll",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "documentation-type"
+                ]
+            }
+        },
+        "/documentation-type/{id}": {
+            "get": {
+                "operationId": "DocumentationTypeController_findOne",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "documentation-type"
+                ]
+            },
+            "put": {
+                "operationId": "DocumentationTypeController_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateDocumentationTypeDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "documentation-type"
+                ]
+            },
+            "delete": {
+                "operationId": "DocumentationTypeController_remove",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "documentation-type"
+                ]
+            }
+        },
+        "/documentation-type/document-type/{name}": {
+            "get": {
+                "operationId": "DocumentationTypeController_getDocumentTypeByName",
+                "parameters": [
+                    {
+                        "name": "typeName",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "documentation-type"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "API Documentation",
+        "description": "api validate and registry documents",
+        "version": "1.0",
+        "contact": {}
+    },
+    "tags": [
+        {
+            "name": "Validate Token",
+            "description": ""
+        },
+        {
+            "name": "Registry Documents",
+            "description": ""
+        },
+        {
+            "name": "External Data Personal",
+            "description": ""
+        },
+        {
+            "name": "external-organization-chart-data",
+            "description": ""
+        },
+        {
+            "name": "documentation-type",
+            "description": ""
+        },
+        {
+            "name": "Permissions",
+            "description": ""
+        },
+        {
+            "name": "Road-map",
+            "description": ""
+        }
+    ],
+    "servers": [],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "type": "http"
+            }
+        },
+        "schemas": {
+            "LoginCentralAuthDTO": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    },
+                    "app": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "token",
+                    "app"
+                ]
+            },
+            "CreateDocumentDTO": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Resources from DataCenter"
+                    },
+                    "ciPersonal": {
+                        "type": "string",
+                        "example": "8574898"
+                    },
+                    "documentType": {
+                        "type": "string",
+                        "example": "Costos"
+                    },
+                    "stateDocument": {
+                        "type": "string",
+                        "example": "Revision"
+                    },
+                    "documentDestinations": {
+                        "type": "string",
+                        "example": "derecho"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "contract document registration for new staff. It is on revision"
+                    },
+                    "file": {
+                        "type": "string",
+                        "example": "data:@file/jpeg;base64,/9jq"
+                    }
+                },
+                "required": [
+                    "title",
+                    "ciPersonal",
+                    "documentType",
+                    "stateDocument",
+                    "documentDestinations",
+                    "description",
+                    "file"
+                ]
+            },
+            "UpdateDocumentDTO": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Resources from DataCenter"
+                    },
+                    "ciPersonal": {
+                        "type": "string",
+                        "example": "8574898"
+                    },
+                    "documentType": {
+                        "type": "string",
+                        "example": "Costos"
+                    },
+                    "stateDocument": {
+                        "type": "string",
+                        "example": "Revision"
+                    },
+                    "documentDestinations": {
+                        "type": "string",
+                        "example": "derecho"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "contract document registration for new staff. It is on revision"
+                    },
+                    "file": {
+                        "type": "string",
+                        "example": "data:@file/jpeg;base64,/9jq"
+                    }
+                },
+                "required": [
+                    "title",
+                    "ciPersonal",
+                    "documentType",
+                    "stateDocument",
+                    "documentDestinations",
+                    "description",
+                    "file"
+                ]
+            },
+            "User": {
+                "type": "object",
+                "properties": {}
+            },
+            "CreateCommentDto": {
+                "type": "object",
+                "properties": {
+                    "author": {
+                        "example": "JuanDolie",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        ]
+                    },
+                    "date": {
+                        "type": "object",
+                        "example": "2023-05-29T03:05:14.742Z"
+                    },
+                    "comment": {
+                        "type": "string",
+                        "example": "Esto es mi comentario del documeto"
+                    }
+                },
+                "required": [
+                    "author",
+                    "date",
+                    "comment"
+                ]
+            },
+            "CreateSignatureAprovedDto": {
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "type": "string",
+                        "example": "johndoe"
+                    },
+                    "dateSignatured": {
+                        "format": "date-time",
+                        "type": "string",
+                        "example": "2023-05-29T03:05:14.742Z"
+                    }
+                },
+                "required": [
+                    "user",
+                    "dateSignatured"
+                ]
+            },
+            "CreateMilestoneDto": {
+                "type": "object",
+                "properties": {
+                    "author": {
+                        "example": "juandolie",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        ]
+                    },
+                    "typeMIlestone": {
+                        "type": "string",
+                        "example": "Creacion"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "se creo el documento ..."
+                    }
+                },
+                "required": [
+                    "author",
+                    "typeMIlestone",
+                    "description"
+                ]
+            },
+            "CreateRoadMapDto": {
+                "type": "object",
+                "properties": {
+                    "nameRoadMap": {
+                        "type": "string",
+                        "example": "hoja de ruta para gastos"
+                    },
+                    "document": {
+                        "type": "string",
+                        "example": "DOC-001"
+                    },
+                    "documentPurpose": {
+                        "type": "string",
+                        "example": "Llevar datos de gastos"
+                    },
+                    "documentScope": {
+                        "type": "string",
+                        "example": "el alcance es solo mostrar los datos de gastos"
+                    },
+                    "map": {
+                        "example": [
+                            "departamento 5E",
+                            "departamento 6F",
+                            "Gestor jefe gastos"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "resources": {
+                        "example": [
+                            "transporte",
+                            "papelera"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Se muestran datos sobre gastos en compra de ..."
+                    },
+                    "dateInit": {
+                        "type": "string",
+                        "example": "2023-05-29T03:05:14.742Z"
+                    },
+                    "dateEnd": {
+                        "type": "string",
+                        "example": "2023-05-29T03:05:14.742Z"
+                    }
+                },
+                "required": [
+                    "nameRoadMap",
+                    "document",
+                    "documentPurpose",
+                    "documentScope",
+                    "map",
+                    "resources",
+                    "description",
+                    "dateInit",
+                    "dateEnd"
+                ]
+            },
+            "UpdateRoadMapDto": {
+                "type": "object",
+                "properties": {
+                    "nameRoadMap": {
+                        "type": "string",
+                        "example": "hoja de ruta para gastos"
+                    },
+                    "document": {
+                        "type": "string",
+                        "example": "DOC-001"
+                    },
+                    "documentPurpose": {
+                        "type": "string",
+                        "example": "Llevar datos de gastos"
+                    },
+                    "documentScope": {
+                        "type": "string",
+                        "example": "el alcance es solo mostrar los datos de gastos"
+                    },
+                    "map": {
+                        "example": [
+                            "departamento 5E",
+                            "departamento 6F",
+                            "Gestor jefe gastos"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "resources": {
+                        "example": [
+                            "transporte",
+                            "papelera"
+                        ],
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Se muestran datos sobre gastos en compra de ..."
+                    },
+                    "dateInit": {
+                        "type": "string",
+                        "example": "2023-05-29T03:05:14.742Z"
+                    },
+                    "dateEnd": {
+                        "type": "string",
+                        "example": "2023-05-29T03:05:14.742Z"
+                    }
+                },
+                "required": [
+                    "nameRoadMap",
+                    "document",
+                    "documentPurpose",
+                    "documentScope",
+                    "map",
+                    "resources",
+                    "description",
+                    "dateInit",
+                    "dateEnd"
+                ]
+            },
+            "CreatePermissionDto": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            },
+            "UpdatePermissionDto": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CreateDocumentationTypeDto": {
+                "type": "object",
+                "properties": {
+                    "typeName": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "typeName"
+                ]
+            },
+            "UpdateDocumentationTypeDto": {
+                "type": "object",
+                "properties": {
+                    "typeName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
